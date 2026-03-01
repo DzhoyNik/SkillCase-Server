@@ -4,7 +4,9 @@ const { DataTypes } = require("sequelize")
 const Case = sequelize.define("case", {
     id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
     title: { type: DataTypes.STRING, allowNull: false },
-    description: { type: DataTypes.TEXT('medium'), allowNull: true }
+    description: { type: DataTypes.TEXT('medium'), allowNull: true },
+    attempts: { type: DataTypes.INTEGER, allowNull: true },
+    deadline: { type: DataTypes.STRING, allowNull: true },
 })
 
 const CaseStatus = sequelize.define("caseStatus", {
@@ -19,7 +21,8 @@ const CaseDifficulty = sequelize.define("caseDifficulty", {
 
 const CaseRequirement = sequelize.define("caseRequirement", {
     id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
-    requirement: { type: DataTypes.TEXT('medium'), allowNull: false }
+    requirement: { type: DataTypes.TEXT('medium'), allowNull: false },
+    sequence: { type: DataTypes.INTEGER, allowNull: false },
 })
 
 const Tag = sequelize.define("tag", {

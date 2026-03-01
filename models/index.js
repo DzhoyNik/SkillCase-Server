@@ -1,21 +1,17 @@
 const { User, UserRole } = require('./User')
-const { Student } = require('./Student')
 const { Company, Employee } = require('./Company')
 const { Case, CaseStatus, CaseDifficulty, CaseRequirement, Tag, CaseTags } = require("./Case")
-const { Solution, SolutionStatus } = require("./Solution")
-const { Review, AutoCheckResult } = require("./Review")
+const { Solution, SolutionAttempt, SolutionAttemptStatus, SolutionFile, SolutionFileType } = require("./Solution")
+const { Review } = require("./Review")
 
-UserRole.hasOne(User)
+UserRole.hasMany(User)
 User.belongsTo(UserRole)
-
-User.hasOne(Student)
-Student.belongsTo(User)
-
-User.hasOne(Employee)
-Employee.belongsTo(User)
 
 Company.hasMany(Employee)
 Employee.belongsTo(Company)
+
+User.hasMany(Employee)
+Employee.belongsTo(User)
 
 Company.hasMany(Case)
 Case.belongsTo(Company)
@@ -35,29 +31,34 @@ CaseTags.belongsTo(Case)
 Tag.hasMany(CaseTags)
 CaseTags.belongsTo(Tag)
 
+User.hasMany(Solution)
+Solution.belongsTo(User)
+
 Case.hasMany(Solution)
 Solution.belongsTo(Case)
 
-Student.hasMany(Solution)
-Solution.belongsTo(Student)
+Solution.hasMany(SolutionAttempt)
+SolutionAttempt.belongsTo(Solution)
 
-SolutionStatus.hasMany(Solution)
-Solution.belongsTo(SolutionStatus)
+SolutionAttemptStatus.hasMany(SolutionAttempt)
+SolutionAttempt.belongsTo(SolutionAttemptStatus)
 
-Solution.hasMany(Review)
-Review.belongsTo(Solution)
+SolutionAttempt.hasMany(SolutionFile)
+SolutionFile.belongsTo(SolutionAttempt)
+
+SolutionFileType.hasMany(SolutionFile)
+SolutionFile.belongsTo(SolutionFileType)
+
+SolutionAttempt.hasMany(Review)
+Review.belongsTo(SolutionAttempt)
 
 Employee.hasMany(Review)
 Review.belongsTo(Employee)
 
-Solution.hasOne(AutoCheckResult)
-AutoCheckResult.belongsTo(Solution)
-
 module.exports = {
     User, UserRole,
-    Student,
     Company, Employee,
     Case, CaseStatus, CaseDifficulty, CaseRequirement, Tag, CaseTags,
-    Solution, SolutionStatus,
-    Review, AutoCheckResult
+    Solution, SolutionAttempt, SolutionAttemptStatus, SolutionFile, SolutionFileType,
+    Review
 }
