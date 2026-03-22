@@ -23,9 +23,9 @@ const generateJwt = (id, lastName, firstName, patronymic, email, role) => {
 class AuthController {
     async signUp(req, res, next) {
         try {
-            const { surname, name, patronymic, email, password } = req.body
+            const { lastName, firstName, patronymic, email, password } = req.body
 
-            if (!surname || !name || !patronymic || !email || !password) {
+            if (!lastName || !firstName || !patronymic || !email || !password) {
                 return next(ApiError.badRequest("Заполните все поля!"))
             }
 
@@ -38,8 +38,8 @@ class AuthController {
             const hashPassword = await bcrypt.hash(password, 5)
 
             const user = await User.create({
-                lastName: surname,
-                firstName: name,
+                lastName: lastName,
+                firstName: firstName,
                 patronymic,
                 email,
                 password: hashPassword,
