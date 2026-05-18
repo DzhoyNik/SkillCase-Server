@@ -1,5 +1,5 @@
-const { User, UserRole } = require('./User')
-const { Company, Employee } = require('./Company')
+const { User, UserRole, UserStats, UserInfo, UserLinks } = require('./User')
+const { Application, ApplicationStatus, ApplicationDecision, Company, Employee } = require('./Company')
 const { Case, CaseStatus, CaseDifficulty, CaseRequirement, Tag, CaseTags } = require("./Case")
 const { Solution, SolutionAttempt, SolutionAttemptStatus, SolutionFile, SolutionFileType } = require("./Solution")
 const { Review } = require("./Review")
@@ -7,11 +7,32 @@ const { Review } = require("./Review")
 UserRole.hasMany(User)
 User.belongsTo(UserRole)
 
+User.hasOne(UserStats)
+UserStats.belongsTo(User)
+
+User.hasOne(UserInfo)
+UserInfo.belongsTo(User)
+
+User.hasMany(UserLinks)
+UserLinks.belongsTo(User)
+
 Company.hasMany(Employee)
 Employee.belongsTo(Company)
 
 User.hasMany(Employee)
 Employee.belongsTo(User)
+
+User.hasMany(Application)
+Application.belongsTo(User)
+
+User.hasMany(ApplicationDecision)
+ApplicationDecision.belongsTo(User)
+
+Application.hasMany(ApplicationDecision)
+ApplicationDecision.belongsTo(Application)
+
+ApplicationStatus.hasMany(ApplicationDecision)
+ApplicationDecision.belongsTo(ApplicationStatus)
 
 Company.hasMany(Case)
 Case.belongsTo(Company)
@@ -56,8 +77,8 @@ Employee.hasMany(Review)
 Review.belongsTo(Employee)
 
 module.exports = {
-    User, UserRole,
-    Company, Employee,
+    User, UserRole, UserStats, UserLinks,
+    Application, ApplicationDecision, ApplicationStatus, Company, Employee,
     Case, CaseStatus, CaseDifficulty, CaseRequirement, Tag, CaseTags,
     Solution, SolutionAttempt, SolutionAttemptStatus, SolutionFile, SolutionFileType,
     Review

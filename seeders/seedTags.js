@@ -1,0 +1,23 @@
+const { Tag } = require('../models/Case')
+
+module.exports = async () => {
+    await Tag.findOrCreate({ where: { tag: 'Frontend', isSystem: true }})
+    await Tag.findOrCreate({ where: { tag: 'Backend', isSystem: true }})
+    await Tag.findOrCreate({ where: { tag: 'Fullstack', isSystem: true }})
+    await Tag.findOrCreate({ where: { tag: 'React', isSystem: true }})
+    await Tag.findOrCreate({ where: { tag: 'Node.js', isSystem: true }})
+    await Tag.findOrCreate({ where: { tag: 'SQL', isSystem: true }})
+    await Tag.findOrCreate({ where: { tag: 'UI/UX', isSystem: true }})
+    await Tag.findOrCreate({ where: { tag: 'DevOps', isSystem: true }})
+    await Tag.findOrCreate({ where: { tag: 'EdTech', isSystem: true }})
+    await Tag.findOrCreate({ where: { tag: 'FinTech', isSystem: true }})
+    await Tag.findOrCreate({ where: { tag: 'E-commerce', isSystem: true }})
+    await Tag.findOrCreate({ where: { tag: 'HealthTech', isSystem: true }})
+    await Tag.findOrCreate({ where: { tag: 'SaaS', isSystem: true }})
+    await Tag.findOrCreate({ where: { tag: 'CRUD', isSystem: true }})
+    await Tag.findOrCreate({ where: { tag: 'API', isSystem: true }})
+    await Tag.findOrCreate({ where: { tag: 'Optimization', isSystem: true }})
+    await Tag.findOrCreate({ where: { tag: 'Bug Fix', isSystem: true }})
+    await Tag.findOrCreate({ where: { tag: 'Feature Development', isSystem: true }})
+    await Tag.findOrCreate({ where: { tag: 'Refactoring', isSystem: true }})
+}

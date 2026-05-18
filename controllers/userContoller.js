@@ -30,6 +30,17 @@ class UserController {
             next(ApiError.badRequest(e.message))
         }
     }
+
+    async changeRole(req, res, next) {
+        try {
+            const { userId, userRoleId } = req.body
+            const user = await User.findOne({ where: { id: userId }})
+            const data = await user.update({ userRoleId: userRoleId })
+            return res.status(202).json(data)
+        } catch (e) {
+            next(ApiError.badRequest(e.message))
+        }
+    }
 }
 
 module.exports = new UserController()
