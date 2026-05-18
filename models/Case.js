@@ -4,7 +4,8 @@ const { DataTypes } = require("sequelize")
 const Case = sequelize.define("case", {
     id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
     title: { type: DataTypes.STRING, allowNull: false },
-    description: { type: DataTypes.TEXT('medium'), allowNull: true }
+    description: { type: DataTypes.TEXT('medium'), allowNull: true },
+    points: { type: DataTypes.INTEGER, allowNull: false }
 })
 
 const CaseStatus = sequelize.define("caseStatus", {
@@ -19,23 +20,15 @@ const CaseDifficulty = sequelize.define("caseDifficulty", {
 
 const CaseRequirement = sequelize.define("caseRequirement", {
     id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
-    requirement: { type: DataTypes.TEXT('medium'), allowNull: false }
+    requirement: { type: DataTypes.TEXT('medium'), allowNull: false },
+    sequence: { type: DataTypes.INTEGER, allowNull: false },
 })
 
 const Tag = sequelize.define("tag", {
     id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
-    type: { type: DataTypes.STRING, allowNull: false },
-    tag: { type: DataTypes.STRING, allowNull: false }
-    },
-    {
-        indexes: [
-            {
-                unique: true,
-                fields: ["type", "tag"]
-            }
-        ]
-    }
-)
+    tag: { type: DataTypes.STRING, allowNull: false },
+    isSystem: { type: DataTypes.BOOLEAN, defaultValue: false, allowNull: false }
+})
 
 const CaseTags = sequelize.define("caseTags", {
     id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true }
